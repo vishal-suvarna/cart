@@ -11,9 +11,30 @@ class CartItem extends React.Component {
     // this.increaseQuantity=this.increaseQuantity.bind(this);
   }
 
-  increaseQuantity=()=>{
-      console.log('this',this.state);
-  }
+  increaseQuantity = () => {
+    //   setstare form 1
+    //   this.setState({
+    //       qty:this.state.qty+1,
+    //   });
+    // // form 2 //if previous state require use this state
+    this.setState((prevState)=>{
+        return{
+            qty:prevState.qty+1,
+        }
+    });
+  };
+
+  decreaseQuantity = () => {
+    const { qty } = this.state;
+    if (qty === 0) {
+      return;
+    }
+    this.setState((prevState) => {
+      return {
+        qty: prevState.qty - 1,
+      };
+    });
+  };
   render() {
     // object destructuring
     const { price, title, qty } = this.state;
@@ -24,8 +45,8 @@ class CartItem extends React.Component {
         </div>
         <div className="right-block">
           <div style={{ fontSize: 25 }}>{title}</div>
-          <div style={{ fontSize: 20, color: "grey" }}>{price}</div>
-          <div style={{ fontSize: 15, color: "grey" }}>{qty}</div>
+          <div style={{ color: "grey" }}>{price}</div>
+          <div style={{ color: "grey" }}>{qty}</div>
           <div className="cart-item-actions">
             {/* buttons */}
             <img
@@ -38,6 +59,7 @@ class CartItem extends React.Component {
               alt="decrease"
               className="actions-icons"
               src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
+              onClick={this.decreaseQuantity}
             ></img>
             <img
               alt="delete"

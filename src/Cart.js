@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "./Navbar"
 import CartItem from "./CartItem";
 class Cart extends React.Component {
   constructor() {
@@ -73,6 +74,7 @@ class Cart extends React.Component {
         {/* <CartItem qty={1} price={9999} title={"Phoone"} img={""}></CartItem> */}
         {products.map((product) => {
           return (
+            <div>
             <CartItem
               product={product}
               key={product.id}
@@ -80,6 +82,7 @@ class Cart extends React.Component {
               onDecreaseQty={this.handleDecreaseQuantity}
               onDeleteProduct={this.handleDeleteProduct}
             ></CartItem>
+            </div>
           );
         })}
       </div>
